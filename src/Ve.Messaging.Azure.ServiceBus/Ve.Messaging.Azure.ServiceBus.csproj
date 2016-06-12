@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6E721311-5D76-452F-8CF9-B19D5D54F62E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ve.Messaging.Azure.ServiceBus</RootNamespace>
+    <AssemblyName>Ve.Messaging.Azure.ServiceBus</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.ServiceBus, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.ServiceBus.3.1.7\lib\net45-full\Microsoft.ServiceBus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Ve.Metrics.StatsDClient.Abstract, Version=0.4.59.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ve.Metrics.StatsDClient.Abstract.0.4.59.0\lib\net45\Ve.Metrics.StatsDClient.Abstract.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ve.Platypus.Serialisers.Abstract, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ve.Platypus.Serialisers.PlainText.0.0.9\lib\net45\Ve.Platypus.Serialisers.Abstract.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ve.Platypus.Serialisers.PlainText, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ve.Platypus.Serialisers.PlainText.0.0.9\lib\net45\Ve.Platypus.Serialisers.PlainText.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Consumer\ConsumerFactory.cs" />
+    <Compile Include="Consumer\MessageConsumer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Publisher\ITopicClientCreator.cs" />
+    <Compile Include="Publisher\ITopicCreator.cs" />
+    <Compile Include="Publisher\PublisherFactory.cs" />
+    <Compile Include="Publisher\MessagePublisher.cs" />
+    <Compile Include="Publisher\ServiceBusPublisherConfiguration.cs" />
+    <Compile Include="Publisher\ServiceBusPublisherStrategy.cs" />
+    <Compile Include="Publisher\TopicClientCreator.cs" />
+    <Compile Include="Publisher\TopicCreator.cs" />
+    <Compile Include="Publisher\FailoverPublisherClientResolver.cs" />
+    <Compile Include="Publisher\FailoverResolver.cs" />
+    <Compile Include="Publisher\IPublisherClientResolver.cs" />
+    <Compile Include="Publisher\IFailoverResolver.cs" />
+    <Compile Include="Publisher\Wrapper\ITopicClientWrapper.cs" />
+    <Compile Include="Publisher\SimplePublisherClientResolver.cs" />
+    <Compile Include="Publisher\Wrapper\TopicClientWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ve.Messaging\Ve.Messaging.csproj">
+      <Project>{611aa996-567c-4e6b-a8d3-de487e305030}</Project>
+      <Name>Ve.Messaging</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
