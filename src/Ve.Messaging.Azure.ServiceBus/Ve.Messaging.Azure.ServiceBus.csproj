@@ -47,14 +47,6 @@
       <HintPath>..\packages\Ve.Metrics.StatsDClient.Abstract.0.4.59.0\lib\net45\Ve.Metrics.StatsDClient.Abstract.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Ve.Platypus.Serialisers.Abstract, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ve.Platypus.Serialisers.PlainText.0.0.9\lib\net45\Ve.Platypus.Serialisers.Abstract.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Ve.Platypus.Serialisers.PlainText, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ve.Platypus.Serialisers.PlainText.0.0.9\lib\net45\Ve.Platypus.Serialisers.PlainText.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Consumer\ConsumerFactory.cs" />
