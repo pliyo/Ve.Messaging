@@ -14,6 +14,9 @@ namespace Ve.Messaging.SampleApp
 {
     public class Program
     {
+        static string YOUR_PRIMARY_CONNECTION_STRING = "ServiceBus.ConnectionString.Primary";
+        static string YOUR_FAILOVER_CONNECTION_STRING = "ServiceBus.ConnectionString.Failover";
+        
         static void Main(string[] args)
         {
             var statsdConfig = InstantiateStatsdConfig();
@@ -43,9 +46,10 @@ namespace Ve.Messaging.SampleApp
 
         private static IMessageConsumer GetConsumer()
         {
+            string primaryConnectionString = ConfigurationManager.AppSettings[YOUR_PRIMARY_CONNECTION_STRING];
             var factory = new ConsumerFactory();
             return factory.GetCosumer(
-                "Endpoint=sb://v-dv-dtrc-failover.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=bmTetnCQLAH5+cJqTnlNj+ZtpEkafIcIWw5NQUnSIAU=",
+                primaryConnectionString,
                 "testtopic2","",TimeSpan.MaxValue,"testsubsccription", new SimpleSerializer());
         }
 
@@ -75,12 +79,12 @@ namespace Ve.Messaging.SampleApp
 
         private static IMessagePublisher GetSender(PublisherFactory publisherFactory)
         {
+            string primaryConnectionString = ConfigurationManager.AppSettings[YOUR_PRIMARY_CONNECTION_STRING];
             var sender = publisherFactory.CreatePublisher(new ServiceBusPublisherConfiguration()
             {
                 PrimaryConfiguration = new TopicConfiguration()
                 {
-                    ConnectionString =
-                        "Endpoint=sb://v-dv-dtrc-failover.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=bmTetnCQLAH5+cJqTnlNj+ZtpEkafIcIWw5NQUnSIAU=",
+                    ConnectionString = primaryConnectionString,
                     TopicName = "testtopic2",
                 },
                 ServiceBusPublisherStrategy = ServiceBusPublisherStrategy.Simple
